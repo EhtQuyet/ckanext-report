@@ -1,0 +1,12 @@
+{% extends 'ckanext_report/edit_base.html' %}
+
+{% block primary_content_inner %}
+    {% snippet 'ckanext_report/snippets/report_content.html', pages=c.page.items, data=data, type=page_type, title='Orgs list' %}
+    {{ c.page.pager() }}
+{% endblock %}
+
+{% block main_content %}
+    <div class="wrapper no-nav">
+        {{ self.primary_content() }}
+    </div>
+{% endblock %}

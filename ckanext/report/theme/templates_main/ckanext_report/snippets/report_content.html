@@ -1,0 +1,71 @@
+{% set pages_total = pages|length %}
+{% set action = '{0}_show'.format(type) %}
+
+{% set ckan_29_or_higher = h.ckan_version().split('.')[1] | int >= 9 %}
+
+<h1 class="page-heading page-list-header">{{ title or "Users list" if type == "report" else "New pages" }}</h1>
+<div class="col" style="overflow-x: auto">
+    <table class="table table-bordered" style="width:auto">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Title</th>
+                <th scope="col">Type </th>
+                <th scope="col">Description</th>
+                <th scope="col">Image URL</th>
+                <th scope="col">Created</th>
+                <th scope="col">Is Organization</th>
+                <th scope="col">Approval Status</th>
+                <th scope="col">State</th>
+                <th scope="col">Capacity</th>
+                <th scope="col">Display Name</th>
+                <th scope="col">Image dispaly URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <th class="text-gray-900" scope="row">
+                    {{item.name}}
+                </th>
+                <th class="text-gray-900" scope="row">
+                    {{item.title}}
+                </th>
+                <td class="fw-bolder text-gray-500">
+                    {{item.type}}
+                </td>
+                <td class="fw-bolder text-gray-500">
+                    {{item.description}}
+                </td>
+                <td class="fw-bolder text-gray-500">
+                    {{item.image_url}}
+                </td>
+                <td class="fw-bolder text-gray-500">
+                    {{item.created }}
+                </td>
+                <td class="fw-bolder text-gray-500">
+                    {{item.is_organization }}
+                </td>
+                <th class="text-gray-900" scope="row">
+                    {{item.approval_status}}
+                </th>
+                <th class="text-gray-900" scope="row">
+                    {{item.state}}
+                </th>
+                <td class="fw-bolder text-gray-500">
+                    {{item.capacity}}
+                </td>
+                <td class="fw-bolder text-gray-500">
+                    {{item.display_name}}
+                </td>
+                <td class="fw-bolder text-gray-500">
+                    {{item.image_display_url}}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<form action="/report" method="post">
+    <button class="btn btn-primary" type="submit">Download</button>
+</form>
